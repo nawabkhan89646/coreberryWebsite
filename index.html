@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coreberry | Technology Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3b82f6;
+            --secondary: #6366f1;
+            --dark: #0f172a;
+            --darker: #0a1120;
+            --light: #e2e8f0;
+            --medium: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.7);
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+        
+        .nav_logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+        }
+        
+        .nav_logo img {
+            height: 60px;
+            filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+        }
+        
+        .nav_logo h2 {
+            color: var(--light);
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+        
+        nav ul li a:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: #93c5fd;
+        }
+        
+        input[type="checkbox"] {
+            display: none;
+        }
+        
+        .menu_btn, .close_btn {
+            font-size: 2rem;
+            color: var(--light);
+            cursor: pointer;
+            display: none;
+        }
+        
+        /* Hero Section */
+        .hero_section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        
+        .bigimage {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(10, 17, 32, 0.9)), 
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .hero_content {
+            max-width: 800px;
+            z-index: 2;
+        }
+        
+        .hero_content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #60a5fa, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero_content p {
+            font-size: 1.4rem;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 14px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        /* Capabilities Section */
+        .capabilities {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-header .logo-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .section-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #60a5fa, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-header .subtitle {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+        
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        
+        .card-header {
+            padding: 25px 25px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 23, 42, 0.4);
+        }
+        
+        .card-header h2 {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            color: #93c5fd;
+            gap: 15px;
+        }
+        
+        .card-header img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+        
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content ul {
+            list-style-type: none;
+        }
+        
+        .card-content li {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .card-content li:last-child {
+            border-bottom: none;
+        }
+        
+        .card-content li:hover {
+            color: #60a5fa;
+            transform: translateX(5px);
+        }
+        
+        .card-content li i {
+            color: #3b82f6;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #0a1120, #0f172a);
+            text-align: center;
+        }
+        
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #93c5fd;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cbd5e1;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: var(--light);
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 17, 32, 0.95);
+            padding: 40px 0 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 300px;
+            margin-bottom: 30px;
+            padding: 0 20px;
+        }
+        
+        .footer-section h3 {
+            color: #93c5fd;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .footer-section p {
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 50%;
+            color: #60a5fa;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero_content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-header h1 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .menu_btn, .close_btn {
+                display: block;
+            }
+            
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.5s ease;
+                z-index: 999;
+            }
+            
+            #click:checked ~ ul {
+                right: 0;
+            }
+            
+            #click:checked ~ .menu_btn {
+                display: none;
+            }
+            
+            #click:not(:checked) ~ .close_btn {
+                display: none;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero_content h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero_content p {
+                font-size: 1.1rem;
+            }
+            
+            .section-header h1 {
+                font-size: 2.3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero_content h1 {
+                font-size: 2rem;
+            }
+            
+            .section-header h1 {
+                font-size: 2rem;
+            }
+            
+            .section-header .logo-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 30px;
+            }
+            
+            .card-header h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+      <nav>
+        <div class="nav_logo">
+          <a href="#">
+            <!-- <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzNiODJmNiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiA4YzIuMjEgMCA0LTEuNzkxIDQtNHMtMS43OS00LTQtNC00IDEuNzkxLTQgNCAxLjc5IDQgNCA0ek0xMiA4djE2TTQgOGg4TTQgMTZoOE0xNiAxMmgtOE0xMiAxNmgtOCI+PC9wYXRoPjwvc3ZnPg==" alt="Coreberry Logo" /> -->
+             <img src="images/bg_removed.png" alt="">
+            <h2>Coreberry</h2>
+          </a>
+        </div>
+
+        <input type="checkbox" id="click" />
+        <label for="click">
+          <i class="menu_btn bx bx-menu"></i>
+          <i class="close_btn bx bx-x"></i>
+        </label>
+
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#capabilities">Services</a></li>
+          <li><a href="#contact">Contact US</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="hero_section">
+      <div class="bigimage">
+        <div class="hero_content">
+          <h1>Innovative Technology Solutions</h1>
+          <p>Expert development services for IoT, HMI, automation, robotics, and embedded systems</p>
+          <a href="#capabilities" class="btn">Explore Our Capabilities</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="capabilities" class="capabilities">
+        <div class="container">
+            <div class="section-header">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                </div>
+                <h1>We Can Develop</h1>
+                <p class="subtitle">Cutting-edge technology solutions across multiple domains with expertise in IoT, HMI, automation, and embedded systems.</p>
+            </div>
+            
+            <div class="grid">
+                <!-- IoT Devices -->
+                <div class="card">
+                    <div class="card-header">
+                         <h2><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik01IDEyLjVhNy41IDcuNSAwIDEgMSAxNSAwYzAgLjkyMi0uMjAzIDEuODQyLS41NjUgMi42NjZNLjIwMiAxNy4yMUE5Ljk1NSA5Ljk1NSAwIDAgMCAzIDIwYzEuNjY4LTEuNjY4IDIuNzQ4LTMuOTU1IDIuODgyLTYuNTk0TTIwIDIwYTkuOTU1IDkuOTU1IDAgMCAwIDIuNzk4LTIuNzkyYy0uMTM0IDIuNjQtMS4yMTQgNC45MjctMi44ODIgNi41OTQiPjwvcGF0aD48L3N2Zz4=" alt="IoT"> IoT Devices</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><i class="fas fa-chevron-right"></i> Fleet Tracking</li>
+                            <li><i class="fas fa-chevron-right"></i> Smart Home Products</li>
+                            <li><i class="fas fa-chevron-right"></i> Lora Gateways</li>
+                            <li><i class="fas fa-chevron-right"></i> Mesh Devices</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- HMI Devices -->
+                <div class="card">
+                    <div class="card-header">
+                         <h2><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yIDhhMiAyIDAgMCAxIDItMmgxNmEyIDIgMCAwIDEgMiAydjhhMiAyIDAgMCAxLTIgMkg0YTIgMiAwIDAgMS0yLTJWOXoiPjwvcGF0aD48cGF0aCBkPSJNMiAxMGgyMCI+PC9wYXRoPjwvc3ZnPg==" alt="HMI"> HMI Devices</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><i class="fas fa-chevron-right"></i> Touch Interfaces</li>
+                            <li><i class="fas fa-chevron-right"></i> Interactive Experiences</li>
+                            <li><i class="fas fa-chevron-right"></i> LVGL Development</li>
+                            <li><i class="fas fa-chevron-right"></i> QT Development</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Industrial Automation -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAyMGE4IDggMCAxIDAgMC0xNiA4IDggMCAwIDAgMCAxNnoiPjwvcGF0aD48cGF0aCBkPSJNMTIgMTZ2NCI+PC9wYXRoPjxwYXRoIGQ9Ik00LjkzIDcuNzVsNS4wMiA1LjAyIj48L3BhdGg+PHBhdGggZD0iTTE0Ljg0IDQuNDVsNS4yNyA1LjI3Ij48L3BhdGg+PHBhdGggZD0iTTE4LjM2IDExLjY0bC01LjE3IDUuMTciPjwvcGF0aD48cGF0aCBkPSJNOC41OSAxNC44MWwtNS4xIDUuMSI+PC9wYXRoPjwvc3ZnPg==" alt="Automation"> Industrial Automation</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><i class="fas fa-chevron-right"></i> Cloud connected PLCs</li>
+                            <li><i class="fas fa-chevron-right"></i> Agricultural automation</li>
+                            <li><i class="fas fa-chevron-right"></i> Advanced motor control</li>
+                            <li><i class="fas fa-chevron-right"></i> Modbus Automation</li>
+                            <li><i class="fas fa-chevron-right"></i> Machine Controllers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Custom Solutions -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiAxNi41YTQuNSA0LjUgMCAxIDAgMC05IDQuNSA0LjUgMCAwIDAgMCA5eiI+PC9wYXRoPjxwYXRoIGQ9Ik0xMC41IDEwLjVsMyAzIj48L3BhdGg+PHBhdGggZD0iTTEwLjUgMTMuNWwzLTMiPjwvcGF0aD48cGF0aCBkPSJNMTkuMjEgMTUuMDJBNyA3IDAgMCAwIDE1IDUuMDIiPjwvcGF0aD48cGF0aCBkPSJNNSA1YTIgMiAwIDAgMCAyIDJoMWEyIDIgMCAwIDAgMi0yTTkgM3Y0Ij48L3BhdGg+PHBhdGggZD0iTTQgMTloMTZhMiAyIDAgMCAwIDItMnYtOGEyIDIgMCAwIDAtMi0ySDRhMiAyIDAgMCAwLTIgMnY4YTIgMiAwIDAgMCAyIDJ6Ij48L3BhdGg+PC9zdmc+" alt="Custom"> Custom Solutions</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><i class="fas fa-chevron-right"></i> Prototype to production</li>
+                            <li><i class="fas fa-chevron-right"></i> Quick Hardware Prototyping</li>
+                            <li><i class="fas fa-chevron-right"></i> Robust and clean software</li>
+                            <li><i class="fas fa-chevron-right"></i> Cloud Infrastructure</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Robotics -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0xMiA4aC43Ij48L3BhdGg+PHBhdGggZD0iTTE2IDEyYTIgMiAwIDEgMS00IDAgMiAyIDAgMCAxIDQgMHoiPjwvcGF0aD48cGF0aCBkPSJNMTIgMTB2MiI+PC9wYXRoPjxwYXRoIGQ9Ik0yMiAxMnYtMmgtMm0tLjEgNmEuOS45IDAgMCAxLS4zLS43YzAtLjIuMS0uNC4zLS43bDIuNi0yLjZhLjkuOSAwIDAgMCAuMy0uN1Y2YS45LjkgMCAwIDAtLjMtLjdsLTQuOC00LjhhLjkuOSAwIDAgMC0uNy0uM0g2YS45LjkgMCAwIDAtLjcuM0wuMyA0LjNBLjkuOSAwIDAgMCAwIDV2M2MwIC4zLjEuNS4zLjdsMi42IDIuNmMuMi4yLjMuNC4zLjdhLjkuOSAwIDAgMS0uMy43bC0yLjYgMi42YS45LjkgMCAwIDAtLjMuN3YzYzAgLjMuMS41LjMuN2w0LjggNC44YS45LjkgMCAwIDAgLjcuM2gzYy4zIDAgLjUtLjEuNy0uM2wyLjYtMi42Yy4yLS4yLjMtLjQuMy0uN2EuOS45IDAgMCAxIC4zLS43bDIuNi0yLjZhLjkuOSAwIDAgMCAuMy0uN3YtM2EuOS45IDAgMCAwLS4zLS43bC00LjgtNC44QS45LjkgMCAwIDAgMTQgMkgxMCI+PC9wYXRoPjwvc3ZnPg==" alt="Robotics"> Robotics</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><i class="fas fa-chevron-right"></i> Reverse Kinematics</li>
+                            <li><i class="fas fa-chevron-right"></i> Mobile Robotic Platforms</li>
+                            <li><i class="fas fa-chevron-right"></i> Advanced Motion Systems</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Embedded Linux -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM2MGE1ZmEiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik0yMCAxMC4zYzAgMi4xOC0xLjE2IDQuMTYtMyA1LjI0VjIwYTIgMiAwIDAgMS0yIDJIOWEyIDIgMCAwIDEtMi0ydi00LjQ2Yy0xLjg0LTEuMDgtMy0zLjA2LTMtNS4yNEE3IDcgMCAwIDEgMTIgM2E3IDcgMCAwIDEgOCA3LjN6Ij48L3BhdGg+PHBhdGggZD0iTTEyIDR2MTAiPjwvcGF0aD48cGF0aCBkPSJNMTYgOS4zYTQgNCAwIDAgMC04IDB2MS40YTQgNCAwIDAgMCA4IDB2LTEuNCI+PC9wYXRoPjwvc3ZnPg==" alt="Linux"> Embedded Linux</h2>
+                    </div>
+                    <div class="card-content">
+                        <ul>
+                            <li><i class="fas fa-chevron-right"></i> Automation Scripts</li>
+                            <li><i class="fas fa-chevron-right"></i> Custom Servers</li>
+                            <li><i class="fas fa-chevron-right"></i> Edge Devices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Coreberry</h3>
+                <p>Innovative technology solutions for IoT, HMI, automation, and embedded systems.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Silicon Valley</p>
+                <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@coreberry.com</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p><a href="#">Home</a></p>
+                <p><a href="#capabilities">Services</a></p>
+                <p><a href="#contact">Contact Us</a></p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Coreberry Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                if(document.getElementById('click').checked) {
+                    document.getElementById('click').checked = false;
+                }
+            });
+        });
+        
+        // Form submission
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
